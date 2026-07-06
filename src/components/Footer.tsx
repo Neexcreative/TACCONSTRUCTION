@@ -36,7 +36,7 @@ export default function Footer() {
       <div style={{ height: 6, background: '#C8102E' }} />
 
       {/* Main footer content */}
-      <div className="responsive-four-col" style={{ padding: '64px 64px 48px', gap: 48 }}>
+      <div className="footer-main-grid page-gutter" style={{ paddingTop: 64, paddingBottom: 48 }}>
 
         {/* Brand column */}
         <div>
@@ -138,10 +138,10 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div style={{
+      <div className="footer-bottom-grid page-gutter" style={{
         borderTop: '2px solid rgba(240,240,240,0.08)',
-        padding: '20px 64px',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16,
+        paddingTop: 20,
+        paddingBottom: 20,
       }}>
         <p style={{ fontFamily: F, fontSize: 12, color: 'rgba(240,240,240,0.25)' }}>
           © {year} T.A.C Construction. All rights reserved.

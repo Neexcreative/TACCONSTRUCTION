@@ -34,7 +34,7 @@ export default function HeroSection() {
     >
       <div
         style={{
-          padding: '88px 64px',
+          padding: 'clamp(44px, 7vw, 88px) clamp(20px, 5vw, 64px)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -178,7 +178,7 @@ export default function HeroSection() {
         style={{
           position: 'relative',
           background: '#121212',
-          padding: '32px',
+          padding: 'clamp(16px, 3vw, 32px)',
           display: 'flex',
           alignItems: 'stretch',
           minHeight: 420,
@@ -198,9 +198,9 @@ export default function HeroSection() {
         <div
           style={{
             position: 'absolute',
-            left: 56,
-            right: 56,
-            bottom: 56,
+            left: 'clamp(28px, 4vw, 56px)',
+            right: 'clamp(28px, 4vw, 56px)',
+            bottom: 'clamp(28px, 4vw, 56px)',
             color: '#F5F2EE',
             pointerEvents: 'none',
           }}
