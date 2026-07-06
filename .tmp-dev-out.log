@@ -1,0 +1,14 @@
+
+> tac-construction@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.5.0.2:3000
+✓ Ready in 429ms
+Creating turbopack project {
+  dir: 'G:\\trabalhos diversos\\AI-Website-System\\projects\\T.A.C Construction',
+  testMode: true
+}
+
+ GET / 200 in 409ms (next.js: 186ms, application-code: 222ms)
