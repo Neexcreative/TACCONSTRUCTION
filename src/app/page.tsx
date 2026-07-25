@@ -1,12 +1,39 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import HomeClient from './HomeClient'
 import HeroSection from './HeroSection'
 import { services } from '@/lib/services'
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_TITLE,
+  SITE_NAME,
+  SOCIAL_IMAGE,
+} from '@/lib/seo'
 
-export const metadata = {
-  title: 'T.A.C Construction | Dublin Renovation & Building Specialists',
-  description: 'Expert residential renovation, heating, plumbing, roofing and general construction across Dublin and Ireland. 15+ years of excellence.',
+export const metadata: Metadata = {
+  title: {
+    absolute: DEFAULT_TITLE,
+  },
+  description: DEFAULT_DESCRIPTION,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_IE',
+    url: '/',
+    siteName: SITE_NAME,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [SOCIAL_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [SOCIAL_IMAGE.url],
+  },
 }
 
 export default function Home() {

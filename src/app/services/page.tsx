@@ -1,9 +1,35 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ServicesListClient from './ServicesListClient'
 import { services } from '@/lib/services'
+import { SITE_NAME, SOCIAL_IMAGE } from '@/lib/seo'
 
-export const metadata = { title: 'Services | T.A.C Construction' }
+const description =
+  'Explore T.A.C Construction services for full renovation, heating systems, roofing, plumbing and general construction.'
+
+export const metadata: Metadata = {
+  title: 'Construction & Renovation Services',
+  description,
+  alternates: {
+    canonical: '/services',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_IE',
+    url: '/services',
+    siteName: SITE_NAME,
+    title: `Construction & Renovation Services | ${SITE_NAME}`,
+    description,
+    images: [SOCIAL_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Construction & Renovation Services | ${SITE_NAME}`,
+    description,
+    images: [SOCIAL_IMAGE.url],
+  },
+}
 
 const F = 'Outfit, sans-serif'
 

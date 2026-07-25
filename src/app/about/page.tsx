@@ -1,9 +1,35 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
 import GoogleReviews from './GoogleReviews'
+import { SITE_NAME, SOCIAL_IMAGE } from '@/lib/seo'
 
-export const metadata = { title: 'About | T.A.C Construction' }
+const description =
+  'Learn about T.A.C Construction, its approach to residential renovation and building work, and the standards behind each project.'
+
+export const metadata: Metadata = {
+  title: 'About',
+  description,
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_IE',
+    url: '/about',
+    siteName: SITE_NAME,
+    title: `About | ${SITE_NAME}`,
+    description,
+    images: [SOCIAL_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `About | ${SITE_NAME}`,
+    description,
+    images: [SOCIAL_IMAGE.url],
+  },
+}
 
 const F = 'Outfit, sans-serif'
 
