@@ -13,7 +13,7 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ]
 
-const F = 'Outfit, sans-serif'
+const F = 'var(--font-outfit), sans-serif'
 
 export default function Navbar() {
   const pathname = usePathname()

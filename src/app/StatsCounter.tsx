@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useInView } from 'framer-motion'
+import { useInView, useReducedMotion } from 'framer-motion'
 
 type StatIconName = 'hard-hat' | 'clipboard-check' | 'star'
 
@@ -73,16 +73,17 @@ function AnimatedCounter({
   start,
 }: AnimatedCounterProps) {
   const [value, setValue] = useState(0)
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
     if (!start) return
 
     let animationFrame = 0
     const startedAt = performance.now()
-    const durationMs = duration * 1000
+    const durationMs = reduceMotion ? 0 : duration * 1000
 
     const update = (now: number) => {
-      const progress = Math.min((now - startedAt) / durationMs, 1)
+      const progress = durationMs === 0 ? 1 : Math.min((now - startedAt) / durationMs, 1)
       const easedProgress = 1 - Math.pow(1 - progress, 3)
 
       setValue(progress === 1 ? target : Math.floor(target * easedProgress))
@@ -95,7 +96,7 @@ function AnimatedCounter({
     animationFrame = requestAnimationFrame(update)
 
     return () => cancelAnimationFrame(animationFrame)
-  }, [duration, start, target])
+  }, [duration, reduceMotion, start, target])
 
   return (
     <div className="home-hero-stat">

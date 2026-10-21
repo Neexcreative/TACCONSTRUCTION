@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const F = 'Outfit, sans-serif'
+const F = 'var(--font-outfit), sans-serif'
 
 const serviceLinks = [
   { href: '/services/renovation', label: 'Full Renovation' },

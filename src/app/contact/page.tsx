@@ -5,7 +5,7 @@ import { useState } from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-const F = 'Outfit, sans-serif'
+const F = 'var(--font-outfit), sans-serif'
 
 const inputStyle: React.CSSProperties = {
   width: '100%',

@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ServiceData } from '@/lib/services'
 import { useDialogFocus } from '@/lib/useDialogFocus'
 
-const F = 'Outfit, sans-serif'
+const F = 'var(--font-outfit), sans-serif'
 const accentColors = ['#C8102E', '#0D0D0D', '#C8102E', '#C8102E', '#0D0D0D']
 
 export default function ServicesListClient({ services }: { services: ServiceData[] }) {

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-const F = 'Outfit, sans-serif'
+const F = 'var(--font-outfit), sans-serif'
 
 export default function AboutClient() {
   return (

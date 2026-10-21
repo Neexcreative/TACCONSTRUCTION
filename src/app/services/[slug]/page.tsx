@@ -20,7 +20,8 @@ export async function generateMetadata({
 
   if (!service) {
     return {
-      title: 'Service',
+      title: 'Page Not Found',
+      alternates: { canonical: null },
       robots: {
         index: false,
         follow: false,

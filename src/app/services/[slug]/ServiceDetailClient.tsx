@@ -7,7 +7,7 @@ import AnimateIn from '@/components/AnimateIn'
 import Link from 'next/link'
 import { ServiceData } from '@/lib/services'
 
-const F = 'Outfit, sans-serif'
+const F = 'var(--font-outfit), sans-serif'
 const accentCycle = ['#C8102E', '#0D0D0D', '#C8102E', '#0D0D0D', '#C8102E']
 
 export default function ServiceDetailClient({ svc }: { svc: ServiceData }) {

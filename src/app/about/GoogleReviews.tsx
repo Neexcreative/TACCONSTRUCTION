@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion, type Variants } from 'framer-motion'
 
-const F = 'Outfit, sans-serif'
+const F = 'var(--font-outfit), sans-serif'
 
 const reviews = [
   {

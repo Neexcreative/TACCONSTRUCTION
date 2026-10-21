@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Outfit } from 'next/font/google'
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE,
@@ -7,8 +8,15 @@ import {
   SOCIAL_IMAGE,
   absoluteUrl,
 } from '@/lib/seo'
+import MotionProvider from '@/components/MotionProvider'
 import WhatsAppWidget from '@/components/WhatsAppWidget'
 import './globals.css'
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -66,7 +74,7 @@ const structuredData = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-IE" className={outfit.variable}>
       <body>
         <script
           type="application/ld+json"
@@ -74,8 +82,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
           }}
         />
-        {children}
-        <WhatsAppWidget />
+        <MotionProvider>
+          {children}
+          <WhatsAppWidget />
+        </MotionProvider>
       </body>
     </html>
   )

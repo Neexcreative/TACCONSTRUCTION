@@ -14,7 +14,7 @@ type ImagePlaceholderProps = {
   minHeight?: number
 }
 
-const F = 'Outfit, sans-serif'
+const F = 'var(--font-outfit), sans-serif'
 
 export default function ImagePlaceholder({
   alt,

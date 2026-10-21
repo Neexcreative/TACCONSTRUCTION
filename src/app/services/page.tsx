@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
 }
 
-const F = 'Outfit, sans-serif'
+const F = 'var(--font-outfit), sans-serif'
 
 export default function Services() {
   return (

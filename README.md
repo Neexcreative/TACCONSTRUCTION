@@ -21,7 +21,7 @@ The following versions are installed in the audited workspace:
 
 | Technology | Installed version | Current use |
 |---|---:|---|
-| Next.js | `16.2.3` | App Router, server/client components, metadata, images, routes, sitemap, and robots |
+| Next.js | `16.4.2` | App Router, server/client components, metadata, images, routes, sitemap, and robots |
 | React | `19.2.4` | UI rendering |
 | React DOM | `19.2.4` | Browser rendering |
 | TypeScript | `5.9.3` | Strictly typed application code |
@@ -29,7 +29,7 @@ The following versions are installed in the audited workspace:
 | Tailwind CSS | `4.2.2` | Imported through global CSS; the interface is primarily custom CSS and inline styles rather than utility classes |
 | `@tailwindcss/postcss` | `4.2.2` | Tailwind/PostCSS integration |
 | ESLint | `9.39.4` | Static analysis |
-| `eslint-config-next` | `16.2.3` | Next.js Core Web Vitals and TypeScript lint rules |
+| `eslint-config-next` | `16.4.2` | Next.js Core Web Vitals and TypeScript lint rules |
 | `@types/node` | `20.19.39` | Node.js types |
 | `@types/react` | `19.2.14` | React types |
 | `@types/react-dom` | `19.2.3` | React DOM types |
@@ -107,7 +107,7 @@ npm run start
 │       ├── seo.ts                    # Domain and shared SEO constants
 │       └── services.ts               # Canonical service and project data
 ├── eslint.config.mjs
-├── next.config.ts                    # Currently no custom Next.js options
+├── next.config.ts                    # Security headers; X-Powered-By disabled
 ├── package.json
 ├── package-lock.json
 └── tsconfig.json
@@ -135,14 +135,16 @@ Unknown service slugs call `notFound()`. The five valid slugs are generated from
 
 # 6. Global Layout and Shared Components
 
-- **Root layout:** `src/app/layout.tsx` imports global CSS, sets English document language, establishes `metadataBase`, and emits Organization and WebSite JSON-LD.
+- **Root layout:** `src/app/layout.tsx` imports global CSS, sets `lang="en-IE"`, loads Outfit through `next/font`, wraps the app in `MotionProvider` (reduced-motion aware), mounts the global `WhatsAppWidget`, establishes `metadataBase`, and emits Organization and WebSite JSON-LD.
+- **404:** `src/app/not-found.tsx` renders a branded, non-indexable page reusing the homepage final-CTA styles.
+- **Overlay focus:** `src/lib/useDialogFocus.ts` provides initial focus, Escape, optional Tab containment, and focus restoration for the mobile Navbar, Services lightbox, and WhatsApp popover.
 - **Navbar:** `src/components/Navbar.tsx` is a fixed, 72px desktop header with logo, Home/About/Services/Contact links, active-route styling, and a quote CTA. At `900px` and below it becomes a toggle-controlled dialog-like mobile panel with backdrop and body-scroll locking.
 - **Footer:** `src/components/Footer.tsx` renders brand copy, navigation, service links, contact text, Irish-owned badge, quote CTA, copyright, and agency link. Its contact and ownership claims require verification.
 - **Containers:** `.section-shell` uses responsive vertical/horizontal padding; `.page-gutter` supplies shared horizontal gutters. There is no fixed max-width container.
 - **Buttons:** global CTA classes exist for the Hero, homepage services header, service modal, and final CTA; many route buttons use component-level inline styles.
 - **Breadcrumbs:** `.breadcrumb-bar` is used on Services and service-detail routes. Service details also emit `BreadcrumbList` JSON-LD.
 - **Animation:** `AnimateIn` uses a once-only Framer Motion viewport entrance. Other motion is implemented locally.
-- **Typography:** Outfit is imported from Google Fonts in `globals.css`, with weights 400, 500, 600, 700, and 900.
+- **Typography:** Outfit is self-hosted through `next/font/google` (variable font) and exposed as `--font-outfit`; components reference `var(--font-outfit), sans-serif`.
 - **Shared colors:** `--bg`, `--fg`, `--red`, `--border`, and `--white` are defined in `:root`.
 
 # 7. Current Homepage Implementation
@@ -249,7 +251,7 @@ There is no actual team-member roster or team portrait grid despite the Hero wor
 5. A separate project-image lightbox.
 6. Shared Footer.
 
-Only one accordion is open at a time. Expanded panels animate height and opacity. Each 4:3 project thumbnail opens a 16:10 image preview. The lightbox closes through its close button, backdrop click, or Escape, and locks body scroll; unlike the approved homepage service modal, it does not implement an explicit focus trap or focus restoration.
+Only one accordion is open at a time. Expanded panels animate height and opacity. Each 4:3 project thumbnail opens a 16:10 image preview. The lightbox closes through its close button, backdrop click, or Escape, and locks body scroll; it is a labelled modal dialog with focus containment and focus restoration via `useDialogFocus`.
 
 At `1024px` and below the Hero, expanded panel, and project grid collapse to one column. Accordion intro text is hidden at that breakpoint, and the category tag is hidden at `576px`.
 
@@ -315,7 +317,7 @@ Common one-off colors include `#F7F4F0`, `#111111`, `#8C1022`, and darker red `#
 - **Spacing:** `.section-shell` is `clamp(48px, 7vw, 88px) clamp(20px, 5vw, 64px)`; `.page-gutter` is `clamp(20px, 5vw, 64px)`.
 - **Animation:** short fades, vertical entrances, subtle lift/scale, and ease-out curves. No particles, 3D, or exaggerated motion.
 - **Focus:** a global 3px translucent red focus-visible outline is present.
-- **Reduced motion:** no explicit `prefers-reduced-motion` CSS or `useReducedMotion` handling exists; this is a pending accessibility improvement.
+- **Reduced motion:** `MotionConfig reducedMotion="user"` covers Framer Motion site-wide, a global `prefers-reduced-motion` rule neutralises CSS transitions/animations and smooth scrolling, and the statistics counters jump to their final values.
 
 # 13. Responsive Behaviour
 
@@ -598,14 +600,12 @@ No incomplete LocalBusiness schema is present.
 - The contact form is non-functional and has no submission integration or complete validation.
 - Contact details and WhatsApp are not clickable links.
 - The map is a CSS placeholder.
-- Explicit reduced-motion support is absent.
 - No automated unit, integration, end-to-end, accessibility, or visual regression tests are configured.
 - `AboutClient.tsx` exists but is not imported.
 - Several legacy images and starter assets are unreferenced.
 - Legacy service SVGs remain beside active PNG placeholders.
 - `.home-hero-eyebrow` CSS remains although no Hero eyebrow is rendered.
-- The mobile Navbar is labelled as a modal dialog and locks scroll, but no explicit focus trap or Escape handler is implemented.
-- The Services-page project lightbox lacks explicit focus trapping/restoration.
+- A full Content-Security-Policy (script/style sources) is deferred until analytics and the map embed are chosen.
 
 # 18. Preservation Rules
 
@@ -634,7 +634,7 @@ No incomplete LocalBusiness schema is present.
 - [ ] Implement form validation, secure submission, success/error feedback, and delivery monitoring.
 - [ ] Connect phone, email, and WhatsApp actions.
 - [ ] Replace the map placeholder.
-- [ ] Add reduced-motion handling and complete keyboard/focus review.
+- [x] Add reduced-motion handling and overlay keyboard/focus handling.
 - [ ] Add proportionate automated and manual testing.
 - [ ] Run `npm run lint` and `npm run build`.
 - [ ] Test all routes, interactions, images, links, and responsive breakpoints.
