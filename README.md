@@ -142,7 +142,7 @@ Unknown service slugs call `notFound()`. The five valid slugs are generated from
 - **Footer:** `src/components/Footer.tsx` renders brand copy, navigation, service links, contact text, Irish-owned badge, quote CTA, copyright, and agency link. Its contact and ownership claims require verification.
 - **Containers:** `.section-shell` uses responsive vertical/horizontal padding; `.page-gutter` supplies shared horizontal gutters. There is no fixed max-width container.
 - **Buttons:** global CTA classes exist for the Hero, homepage services header, service modal, and final CTA; many route buttons use component-level inline styles.
-- **Breadcrumbs:** `.breadcrumb-bar` is used on Services and service-detail routes. Service details also emit `BreadcrumbList` JSON-LD.
+- **Breadcrumbs:** `.breadcrumb-bar` is used on service-detail routes. Service details also emit `BreadcrumbList` JSON-LD.
 - **Animation:** `AnimateIn` uses a once-only Framer Motion viewport entrance. Other motion is implemented locally.
 - **Typography:** Outfit is self-hosted through `next/font/google` (variable font) and exposed as `--font-outfit`; components reference `var(--font-outfit), sans-serif`.
 - **Shared colors:** `--bg`, `--fg`, `--red`, `--border`, and `--white` are defined in `:root`.
@@ -165,7 +165,8 @@ The visual order is Navbar, Hero, statistics strip, services section, final CTA,
 - On smaller screens the overlay becomes darker overall; at `576px` the CTAs stack full width.
 - Framer Motion fades the group and staggers upward entrances for the heading, paragraph, and CTAs.
 - The `h1` supplies the page heading, the image has descriptive alt text, and the overlay is hidden from assistive technology.
-- No Hero eyebrow is rendered. A `.home-hero-eyebrow` style remains but is unused.
+- No eyebrow labels are rendered above headings anywhere on the site (the approved service modal tag is the only exception).
+- **Inner-page hero:** About, Services, and Contact share the `.page-main` / `.page-hero` structure in `globals.css`: full-bleed photo, left-to-right dark overlay, bottom-aligned H1 and description.
 - The active photograph is still named `hero-placeholder.jpg` and should be treated as provisional.
 
 No active split-layout Hero remains. `public/images/hero-bg.jpg`, `hero-bg-left.jpg`, and `public/images/hero/hero-bg.svg` are unreferenced legacy assets.
@@ -186,7 +187,6 @@ The strip is three columns on desktop and three stacked rows at `768px` and belo
 
 ## Homepage service cards
 
-- Eyebrow: “What We Do”
 - Heading: “Construction & Renovation Services”
 - “View All” links to `/services`.
 - Five cards appear in this order: Full Renovation, Heating Systems, Roofing, Plumbing, General Construction.
@@ -220,7 +220,6 @@ This is a service-information modal, not the separate Services-page project ligh
 
 The final section immediately before the Footer uses:
 
-- Eyebrow: “READY TO START?”
 - Heading: “Planning a Renovation or Construction Project?”
 - Supporting text: “Tell us about your project and take the first step towards a clear, professionally managed build.”
 - Primary CTA: “Request a Quote” to `/contact`
@@ -232,7 +231,7 @@ The active design has the light/off-white `var(--bg)` background, a 6px red top 
 
 The active About implementation is `src/app/about/page.tsx`; `AboutClient.tsx` is not imported.
 
-1. **Hero:** centered “OUR TEAM” content over `/images/about/team-hero.jpg`, with a dark overlay and minimum 520px height.
+1. **Hero:** shared `.page-hero` over `/images/about/team-hero.jpg` — “Built with purpose. Finished with care.”
 2. **Company story:** three paragraphs beside `ImagePlaceholder` using `/images/about/about-company.jpg` at 4:3.
 3. **Mission & Values:** Quality, Reliability, and Experience cards.
 4. **Testimonials:** three Framer Motion cards rendered by `GoogleReviews`, each with inline SVG stars and a CSS-only avatar circle.
@@ -244,8 +243,8 @@ There is no actual team-member roster or team portrait grid despite the Hero wor
 
 `/services` renders:
 
-1. Shared Navbar and breadcrumb bar.
-2. A two-part text Hero: dark heading panel with CSS radial-dot decoration and off-white summary/statistics panel. It contains no photograph.
+1. Shared Navbar.
+2. Shared `.page-hero` over `/images/hero/hero-placeholder.jpg` — “Expert trades and refined construction results.”
 3. Five accordion rows driven by `src/lib/services.ts`.
 4. An expanded panel with service introduction, feature text, six features, and four project-image buttons.
 5. A separate project-image lightbox.
@@ -284,7 +283,7 @@ Project names, dates, counties, service descriptions, compliance/certification s
 
 The Contact route has:
 
-- A photo Hero reusing `/images/hero/hero-placeholder.jpg`.
+- Shared `.page-hero` reusing `/images/hero/hero-placeholder.jpg`.
 - Direct-contact cards for phone, WhatsApp, email, and location.
 - Claims for a 24-hour response and 100% Irish ownership.
 - A controlled React form with first name, last name, email, phone, service, and message fields.
@@ -604,7 +603,7 @@ No incomplete LocalBusiness schema is present.
 - `AboutClient.tsx` exists but is not imported.
 - Several legacy images and starter assets are unreferenced.
 - Legacy service SVGs remain beside active PNG placeholders.
-- `.home-hero-eyebrow` CSS remains although no Hero eyebrow is rendered.
+- About, Services, Contact, and Homepage heroes currently use the same provisional roofing photograph (all active JPGs are byte-identical).
 - A full Content-Security-Policy (script/style sources) is deferred until analytics and the map embed are chosen.
 
 # 18. Preservation Rules

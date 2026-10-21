@@ -35,9 +35,6 @@ export default function ServiceDetailClient({ svc }: { svc: ServiceData }) {
           <div style={{ background: '#0D0D0D', padding: 'clamp(44px, 7vw, 80px) clamp(20px, 5vw, 64px)', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.04) 2px, transparent 2px)', backgroundSize: '24px 24px', pointerEvents: 'none' }} />
             <div style={{ width: 40, height: 3, background: accent, marginBottom: 28, position: 'relative', zIndex: 1 }} />
-            <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: accent, marginBottom: 18, position: 'relative', zIndex: 1 }}>
-              {svc.tag}
-            </div>
             <h1
               style={{ fontFamily: F, fontWeight: 700, fontSize: 'clamp(38px, 5vw, 72px)', lineHeight: 0.98, color: '#F5F2EE', letterSpacing: '-0.03em', position: 'relative', zIndex: 1, maxWidth: 560 }}
               dangerouslySetInnerHTML={{ __html: svc.titleHtml.replace(/<br\/>/g, ' ').replace(/style="color:var\(--red\)"/g, `style="color:${accent}"`) }}
@@ -73,9 +70,6 @@ export default function ServiceDetailClient({ svc }: { svc: ServiceData }) {
 
         <section className="section-shell" style={{ background: '#F5F2EE', borderBottom: '1px solid rgba(13,13,13,0.12)' }}>
           <AnimateIn>
-            <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: accent, marginBottom: 16 }}>
-              Portfolio
-            </div>
             <h2 style={{ fontFamily: F, fontWeight: 700, fontSize: 'clamp(30px, 4vw, 48px)', marginBottom: 32, letterSpacing: '-0.03em', lineHeight: 1, color: '#111111' }}>
               {svc.portfolioTitle}
             </h2>
@@ -153,9 +147,6 @@ export default function ServiceDetailClient({ svc }: { svc: ServiceData }) {
 
         <section className="responsive-two-col" style={{ background: '#C8102E', padding: 'clamp(44px, 7vw, 80px) clamp(20px, 5vw, 64px)', borderBottom: '1px solid rgba(13,13,13,0.12)', alignItems: 'center', gap: 28 }}>
           <div>
-            <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', marginBottom: 16 }}>
-              Interested?
-            </div>
             <h2 style={{ fontFamily: F, fontWeight: 700, fontSize: 'clamp(30px, 4vw, 48px)', letterSpacing: '-0.03em', lineHeight: 1, color: '#fff' }}>
               Get a free quote for {svc.title}
             </h2>

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import Navbar from '@/components/Navbar'
@@ -61,29 +62,15 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <main style={{ paddingTop: 72, background: '#F7F4F0', minHeight: '100vh' }}>
-        <section
-          style={{
-            position: 'relative',
-            minHeight: 380,
-            display: 'flex',
-            alignItems: 'center',
-            background: "linear-gradient(rgba(10,10,10,0.6), rgba(10,10,10,0.68)), url('/images/hero/hero-placeholder.jpg') center/cover no-repeat, #171717",
-            borderBottom: '1px solid rgba(13,13,13,0.12)',
-          }}
-        >
-          <div style={{ padding: 'clamp(56px, 9vw, 72px) clamp(20px, 5vw, 64px)', maxWidth: 760, minWidth: 0 }}>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.45 }}>
-              <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.74)', marginBottom: 18 }}>
-                Contact
-              </div>
-              <h1 style={{ fontFamily: F, fontWeight: 700, fontSize: 'clamp(34px, 5vw, 72px)', lineHeight: 1, letterSpacing: '-0.035em', color: '#FFFFFF', marginBottom: 18, overflowWrap: 'break-word' }}>
-                Let&apos;s build something exceptional.
-              </h1>
-              <p style={{ fontFamily: F, fontSize: 'clamp(16px, 2vw, 18px)', lineHeight: 1.8, color: 'rgba(255,255,255,0.78)', maxWidth: 600 }}>
-                Tell us about your project and we&apos;ll get back to you within 24 hours.
-              </p>
-            </motion.div>
+      <main className="page-main" style={{ background: '#F7F4F0' }}>
+        <section className="page-hero" aria-labelledby="contact-heading">
+          <Image className="page-hero-image" src="/images/hero/hero-placeholder.jpg" alt="" fill preload sizes="100vw" />
+          <div className="page-hero-overlay" aria-hidden="true" />
+          <div className="page-hero-content">
+            <h1 id="contact-heading" className="page-hero-title">Let&apos;s build something exceptional.</h1>
+            <p className="page-hero-description">
+              Tell us about your project and we&apos;ll get back to you within 24 hours.
+            </p>
           </div>
         </section>
 

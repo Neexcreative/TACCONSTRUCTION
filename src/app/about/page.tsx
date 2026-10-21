@@ -34,14 +34,13 @@ export default function About() {
   return (
     <>
       <Navbar />
-      <main className="about-page">
-        <section className="about-hero" aria-labelledby="about-heading">
-          <Image className="about-hero-image" src="/images/about/team-hero.jpg" alt="" fill preload sizes="100vw" />
-          <div className="about-hero-overlay" aria-hidden="true" />
-          <div className="about-hero-content">
-            <p className="about-eyebrow about-hero-eyebrow">About T.A.C Construction</p>
-            <h1 id="about-heading" className="about-hero-title">Built with purpose. Finished with care.</h1>
-            <p className="about-hero-description">
+      <main className="page-main">
+        <section className="page-hero" aria-labelledby="about-heading">
+          <Image className="page-hero-image" src="/images/about/team-hero.jpg" alt="" fill preload sizes="100vw" />
+          <div className="page-hero-overlay" aria-hidden="true" />
+          <div className="page-hero-content">
+            <h1 id="about-heading" className="page-hero-title">Built with purpose. Finished with care.</h1>
+            <p className="page-hero-description">
               A considered approach to residential construction, renovation, and the workmanship behind every detail.
             </p>
           </div>
@@ -50,7 +49,6 @@ export default function About() {
         <section className="about-story" aria-labelledby="story-heading">
           <div className="about-story-inner">
             <div className="about-story-copy">
-              <p className="about-eyebrow">Company Story</p>
               <h2 id="story-heading" className="about-section-title">Construction shaped by practical thinking and careful execution.</h2>
               <div className="about-story-body">
                 <p>T.A.C Construction works across residential renovation, roofing, heating, plumbing, and general building projects.</p>
@@ -81,7 +79,6 @@ export default function About() {
 
         <section className="about-principles" aria-labelledby="principles-heading">
           <div className="about-principles-header">
-            <p className="about-eyebrow">Mission &amp; Values</p>
             <h2 id="principles-heading" className="about-section-title">Principles that guide the work.</h2>
           </div>
           <div className="about-principles-grid">
@@ -100,7 +97,6 @@ export default function About() {
         <section className="about-final-cta" aria-labelledby="about-cta-heading">
           <div className="about-final-cta-inner">
             <div className="about-final-cta-copy">
-              <p className="about-eyebrow about-final-cta-eyebrow">Start a Conversation</p>
               <h2 id="about-cta-heading">Planning work for your home?</h2>
               <p>Tell us what you have in mind, or explore the construction and renovation services available.</p>
             </div>

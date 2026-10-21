@@ -49,9 +49,6 @@ export default function GoogleReviews() {
   return (
     <section aria-labelledby="testimonials-heading" style={{ background: '#F7F4F0', borderTop: '1px solid rgba(13,13,13,0.12)', borderBottom: '1px solid rgba(13,13,13,0.12)' }}>
       <div style={{ padding: '80px 64px 28px', textAlign: 'center' }}>
-        <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8C1022', marginBottom: 16 }}>
-          Testimonials
-        </div>
         <h2 id="testimonials-heading" style={{ fontFamily: F, fontWeight: 700, fontSize: 'clamp(32px, 4vw, 50px)', lineHeight: 1, letterSpacing: '-0.03em', color: '#111111', marginBottom: 14 }}>
           Trusted by homeowners across Dublin
         </h2>

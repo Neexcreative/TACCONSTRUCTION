@@ -67,7 +67,6 @@ export default function HomeClient(props: Props) {
         <section className="home-services">
           <div className="home-services-header">
             <div className="home-services-heading">
-              <div className="home-services-eyebrow">What We Do</div>
               <h2 className="home-services-title">
                 Construction &amp; Renovation Services
               </h2>
@@ -235,7 +234,6 @@ export default function HomeClient(props: Props) {
       <section className="home-final-cta">
         <div className="home-final-cta-inner">
           <div className="home-final-cta-copy">
-            <div className="home-final-cta-eyebrow">READY TO START?</div>
             <h2 className="home-final-cta-title">
               Planning a Renovation or Construction Project?
             </h2>

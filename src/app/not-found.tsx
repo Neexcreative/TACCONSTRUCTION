@@ -17,7 +17,6 @@ export default function NotFound() {
         <section className="home-final-cta" aria-labelledby="not-found-heading">
           <div className="home-final-cta-inner">
             <div className="home-final-cta-copy">
-              <p className="home-final-cta-eyebrow">Error 404</p>
               <h1 id="not-found-heading" className="home-final-cta-title">
                 This page could not be found.
               </h1>
