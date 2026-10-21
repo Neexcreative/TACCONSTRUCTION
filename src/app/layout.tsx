@@ -7,6 +7,7 @@ import {
   SOCIAL_IMAGE,
   absoluteUrl,
 } from '@/lib/seo'
+import WhatsAppWidget from '@/components/WhatsAppWidget'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -74,6 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         {children}
+        <WhatsAppWidget />
       </body>
     </html>
   )

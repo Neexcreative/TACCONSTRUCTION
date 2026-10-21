@@ -8,7 +8,7 @@ type ImagePlaceholderProps = {
   src: string
   label: string
   note?: string
-  priority?: boolean
+  preload?: boolean
   dark?: boolean
   ratio?: string
   minHeight?: number
@@ -21,7 +21,7 @@ export default function ImagePlaceholder({
   src,
   label,
   note,
-  priority = false,
+  preload = false,
   dark = false,
   ratio = '16 / 10',
   minHeight = 280,
@@ -48,7 +48,7 @@ export default function ImagePlaceholder({
             src={src}
             alt={alt}
             fill
-            priority={priority}
+            preload={preload}
             sizes="(max-width: 900px) 100vw, 50vw"
             style={{ objectFit: 'cover' }}
             onError={() => setFailed(true)}
@@ -76,7 +76,9 @@ export default function ImagePlaceholder({
         />
       )}
 
-      <div
+      {failed ? <div
+        role="img"
+        aria-label={`${alt}. Image unavailable.`}
         style={{
           position: 'absolute',
           inset: 0,
@@ -121,7 +123,7 @@ export default function ImagePlaceholder({
             </div>
           ) : null}
         </div>
-      </div>
+      </div> : null}
     </div>
   )
 }

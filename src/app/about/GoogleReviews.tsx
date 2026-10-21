@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, type Variants } from 'framer-motion'
+import { motion, useReducedMotion, type Variants } from 'framer-motion'
 
 const F = 'Outfit, sans-serif'
 
@@ -33,9 +33,9 @@ const cardVariants: Variants = {
 
 function Stars() {
   return (
-    <div style={{ display: 'flex', gap: 4 }}>
+    <div aria-hidden="true" style={{ display: 'flex', gap: 4 }}>
       {[...Array(5)].map((_, i) => (
-        <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#C8102E">
+        <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#C8102E" focusable="false">
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
         </svg>
       ))}
@@ -44,13 +44,15 @@ function Stars() {
 }
 
 export default function GoogleReviews() {
+  const reduceMotion = useReducedMotion()
+
   return (
-    <section style={{ background: '#F7F4F0', borderTop: '1px solid rgba(13,13,13,0.12)', borderBottom: '1px solid rgba(13,13,13,0.12)' }}>
+    <section aria-labelledby="testimonials-heading" style={{ background: '#F7F4F0', borderTop: '1px solid rgba(13,13,13,0.12)', borderBottom: '1px solid rgba(13,13,13,0.12)' }}>
       <div style={{ padding: '80px 64px 28px', textAlign: 'center' }}>
         <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8C1022', marginBottom: 16 }}>
           Testimonials
         </div>
-        <h2 style={{ fontFamily: F, fontWeight: 700, fontSize: 'clamp(32px, 4vw, 50px)', lineHeight: 1, letterSpacing: '-0.03em', color: '#111111', marginBottom: 14 }}>
+        <h2 id="testimonials-heading" style={{ fontFamily: F, fontWeight: 700, fontSize: 'clamp(32px, 4vw, 50px)', lineHeight: 1, letterSpacing: '-0.03em', color: '#111111', marginBottom: 14 }}>
           Trusted by homeowners across Dublin
         </h2>
         <p style={{ fontFamily: F, fontSize: 16, lineHeight: 1.8, color: 'rgba(17,17,17,0.62)', maxWidth: 620, margin: '0 auto' }}>
@@ -64,8 +66,8 @@ export default function GoogleReviews() {
             key={review.name}
             custom={index}
             variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
+            initial={reduceMotion ? false : 'hidden'}
+            whileInView={reduceMotion ? undefined : 'visible'}
             viewport={{ once: true, margin: '-60px' }}
             style={{
               background: '#FFFFFF',
@@ -92,9 +94,9 @@ export default function GoogleReviews() {
 
             <Stars />
 
-            <p style={{ fontFamily: F, fontSize: 15, lineHeight: 1.8, color: 'rgba(17,17,17,0.68)', margin: '18px 0 22px' }}>
+            <blockquote style={{ fontFamily: F, fontSize: 15, lineHeight: 1.8, color: 'rgba(17,17,17,0.68)', margin: '18px 0 22px' }}>
               {review.text}
-            </p>
+            </blockquote>
 
             <div>
               <div style={{ fontFamily: F, fontWeight: 650, fontSize: 16, color: '#111111', marginBottom: 4 }}>
