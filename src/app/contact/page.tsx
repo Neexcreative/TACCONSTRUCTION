@@ -72,15 +72,15 @@ export default function ContactPage() {
             borderBottom: '1px solid rgba(13,13,13,0.12)',
           }}
         >
-          <div style={{ padding: '72px 64px', maxWidth: 760 }}>
+          <div style={{ padding: 'clamp(56px, 9vw, 72px) clamp(20px, 5vw, 64px)', maxWidth: 760, minWidth: 0 }}>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.45 }}>
               <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.74)', marginBottom: 18 }}>
                 Contact
               </div>
-              <h1 style={{ fontFamily: F, fontWeight: 700, fontSize: 'clamp(42px, 5vw, 72px)', lineHeight: 1, letterSpacing: '-0.035em', color: '#FFFFFF', marginBottom: 18 }}>
+              <h1 style={{ fontFamily: F, fontWeight: 700, fontSize: 'clamp(34px, 5vw, 72px)', lineHeight: 1, letterSpacing: '-0.035em', color: '#FFFFFF', marginBottom: 18, overflowWrap: 'break-word' }}>
                 Let&apos;s build something exceptional.
               </h1>
-              <p style={{ fontFamily: F, fontSize: 18, lineHeight: 1.8, color: 'rgba(255,255,255,0.78)', maxWidth: 600 }}>
+              <p style={{ fontFamily: F, fontSize: 'clamp(16px, 2vw, 18px)', lineHeight: 1.8, color: 'rgba(255,255,255,0.78)', maxWidth: 600 }}>
                 Tell us about your project and we&apos;ll get back to you within 24 hours.
               </p>
             </motion.div>
@@ -93,7 +93,7 @@ export default function ContactPage() {
               style={{
                 background: '#FFFFFF',
                 border: '1px solid rgba(17,17,17,0.08)',
-                padding: '32px 30px',
+                padding: 'clamp(22px, 5vw, 32px) clamp(18px, 5vw, 30px)',
               }}
             >
               <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8C1022', marginBottom: 22 }}>
@@ -139,7 +139,7 @@ export default function ContactPage() {
               style={{
                 background: '#FFFFFF',
                 border: '1px solid rgba(17,17,17,0.08)',
-                padding: '34px 34px 30px',
+                padding: 'clamp(24px, 5vw, 34px) clamp(18px, 5vw, 34px) clamp(22px, 5vw, 30px)',
               }}
             >
               <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8C1022', marginBottom: 28 }}>
@@ -149,30 +149,31 @@ export default function ContactPage() {
               <form onSubmit={(e) => e.preventDefault()}>
                 <div className="responsive-two-col" style={{ gap: 20 }}>
                   <div style={fieldWrap}>
-                    <label style={labelStyle}>First Name</label>
-                    <input style={inputStyle} name="firstName" value={formData.firstName} onChange={handleChange} onFocus={onFocus} onBlur={onBlur} placeholder="John" />
+                    <label htmlFor="contact-first-name" style={labelStyle}>First Name <span aria-hidden="true">*</span></label>
+                    <input style={inputStyle} id="contact-first-name" autoComplete="given-name" required name="firstName" value={formData.firstName} onChange={handleChange} onFocus={onFocus} onBlur={onBlur} placeholder="John" />
                   </div>
                   <div style={fieldWrap}>
-                    <label style={labelStyle}>Last Name</label>
-                    <input style={inputStyle} name="lastName" value={formData.lastName} onChange={handleChange} onFocus={onFocus} onBlur={onBlur} placeholder="Murphy" />
+                    <label htmlFor="contact-last-name" style={labelStyle}>Last Name <span aria-hidden="true">*</span></label>
+                    <input style={inputStyle} id="contact-last-name" autoComplete="family-name" required name="lastName" value={formData.lastName} onChange={handleChange} onFocus={onFocus} onBlur={onBlur} placeholder="Murphy" />
                   </div>
                 </div>
 
                 <div className="responsive-two-col" style={{ gap: 20 }}>
                   <div style={fieldWrap}>
-                    <label style={labelStyle}>Email</label>
-                    <input style={inputStyle} type="email" name="email" value={formData.email} onChange={handleChange} onFocus={onFocus} onBlur={onBlur} placeholder="john@example.com" />
+                    <label htmlFor="contact-email" style={labelStyle}>Email <span aria-hidden="true">*</span></label>
+                    <input style={inputStyle} type="email" id="contact-email" autoComplete="email" required name="email" value={formData.email} onChange={handleChange} onFocus={onFocus} onBlur={onBlur} placeholder="john@example.com" />
                   </div>
                   <div style={fieldWrap}>
-                    <label style={labelStyle}>Phone</label>
-                    <input style={inputStyle} type="tel" name="phone" value={formData.phone} onChange={handleChange} onFocus={onFocus} onBlur={onBlur} placeholder="+353..." />
+                    <label htmlFor="contact-phone" style={labelStyle}>Phone</label>
+                    <input style={inputStyle} type="tel" id="contact-phone" autoComplete="tel" name="phone" value={formData.phone} onChange={handleChange} onFocus={onFocus} onBlur={onBlur} placeholder="+353..." />
                   </div>
                 </div>
 
                 <div style={fieldWrap}>
-                  <label style={labelStyle}>Service Required</label>
+                  <label htmlFor="contact-service" style={labelStyle}>Service Required</label>
                   <select
                     style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
+                    id="contact-service"
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
@@ -189,9 +190,11 @@ export default function ContactPage() {
                 </div>
 
                 <div style={fieldWrap}>
-                  <label style={labelStyle}>Message</label>
+                  <label htmlFor="contact-message" style={labelStyle}>Message <span aria-hidden="true">*</span></label>
                   <textarea
                     style={{ ...inputStyle, minHeight: 144, resize: 'vertical' }}
+                    id="contact-message"
+                    required
                     name="message"
                     value={formData.message}
                     onChange={handleChange}

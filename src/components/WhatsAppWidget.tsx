@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useDialogFocus } from '@/lib/useDialogFocus'
 
 const WHATSAPP_NUMBER = '353851976302'
 const WHATSAPP_MESSAGE =
@@ -23,26 +24,24 @@ export default function WhatsAppWidget() {
   const widgetRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
+  // Non-modal popover: Escape closes it and focus returns to the toggle,
+  // but Tab is not contained so the rest of the page stays reachable.
+  useDialogFocus(isOpen, {
+    containers: [widgetRef],
+    initialFocus: closeButtonRef,
+    onClose: () => setIsOpen(false),
+    trap: false,
+  })
+
   useEffect(() => {
     if (!isOpen) return
-
-    closeButtonRef.current?.focus()
-
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsOpen(false)
-    }
 
     const closeOnOutsideClick = (event: MouseEvent) => {
       if (!widgetRef.current?.contains(event.target as Node)) setIsOpen(false)
     }
 
-    document.addEventListener('keydown', closeOnEscape)
     document.addEventListener('mousedown', closeOnOutsideClick)
-
-    return () => {
-      document.removeEventListener('keydown', closeOnEscape)
-      document.removeEventListener('mousedown', closeOnOutsideClick)
-    }
+    return () => document.removeEventListener('mousedown', closeOnOutsideClick)
   }, [isOpen])
 
   return (

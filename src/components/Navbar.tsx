@@ -3,7 +3,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useDialogFocus } from '@/lib/useDialogFocus'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -17,6 +18,13 @@ const F = 'Outfit, sans-serif'
 export default function Navbar() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+
+  useDialogFocus(mobileOpen, {
+    containers: [panelRef, toggleRef],
+    onClose: () => setMobileOpen(false),
+  })
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
@@ -99,6 +107,7 @@ export default function Navbar() {
         </div>
 
         <button
+          ref={toggleRef}
           type="button"
           className="site-nav-toggle"
           aria-expanded={mobileOpen}
@@ -118,7 +127,7 @@ export default function Navbar() {
       {mobileOpen ? (
         <>
           <div className="site-nav-mobile-backdrop" onClick={() => setMobileOpen(false)} aria-hidden="true" />
-          <div id="mobile-navigation" className="site-nav-mobile-panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+          <div ref={panelRef} id="mobile-navigation" className="site-nav-mobile-panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
             <ul className="site-nav-mobile-links">
               {navLinks.map(({ href, label }) => {
                 const active = isActive(href)

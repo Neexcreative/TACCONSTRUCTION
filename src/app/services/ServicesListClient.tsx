@@ -2,8 +2,9 @@
 
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ServiceData } from '@/lib/services'
+import { useDialogFocus } from '@/lib/useDialogFocus'
 
 const F = 'Outfit, sans-serif'
 const accentColors = ['#C8102E', '#0D0D0D', '#C8102E', '#C8102E', '#0D0D0D']
@@ -12,13 +13,14 @@ export default function ServicesListClient({ services }: { services: ServiceData
   const [openSlug, setOpenSlug] = useState<string | null>(null)
   const [lightbox, setLightbox] = useState<{ svc: ServiceData; index: number } | null>(null)
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setLightbox(null)
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
+  const lightboxRef = useRef<HTMLDivElement>(null)
+  const lightboxCloseRef = useRef<HTMLButtonElement>(null)
+
+  useDialogFocus(lightbox !== null, {
+    containers: [lightboxRef],
+    initialFocus: lightboxCloseRef,
+    onClose: () => setLightbox(null),
+  })
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
@@ -211,6 +213,10 @@ export default function ServicesListClient({ services }: { services: ServiceData
             style={{ position: 'fixed', inset: 0, background: 'rgba(18,18,18,0.88)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
           >
             <motion.div
+              ref={lightboxRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-lightbox-title"
               initial={{ scale: 0.96, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.96, opacity: 0 }}
@@ -231,6 +237,7 @@ export default function ServicesListClient({ services }: { services: ServiceData
               <Image src={lightbox.svc.projects[lightbox.index].imagePath} alt={lightbox.svc.projects[lightbox.index].name} fill sizes="90vw" style={{ objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(18,18,18,0.1), rgba(18,18,18,0.72))' }} />
               <button
+                ref={lightboxCloseRef}
                 type="button"
                 aria-label="Close project preview"
                 onClick={() => setLightbox(null)}
@@ -255,7 +262,7 @@ export default function ServicesListClient({ services }: { services: ServiceData
                 <div style={{ fontFamily: F, fontSize: 9, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.56)', marginBottom: 10 }}>
                   {lightbox.svc.portfolioTitle}
                 </div>
-                <div style={{ fontFamily: F, fontWeight: 700, fontSize: 'clamp(24px, 4vw, 42px)', color: '#fff', letterSpacing: '-0.02em', lineHeight: 1 }}>
+                <div id="project-lightbox-title" style={{ fontFamily: F, fontWeight: 700, fontSize: 'clamp(24px, 4vw, 42px)', color: '#fff', letterSpacing: '-0.02em', lineHeight: 1 }}>
                   {lightbox.svc.projects[lightbox.index].name}
                 </div>
                 <div style={{ fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.62)', marginTop: 10 }}>
