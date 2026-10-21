@@ -15,6 +15,13 @@ export default function HomeClient(props: Props) {
   const dialogRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const triggerRef = useRef<HTMLButtonElement | null>(null)
+  // Mouse drag-to-scroll for the card track; touch devices keep native swiping.
+  const dragRef = useRef({ active: false, moved: false, startX: 0, startScroll: 0, pointerId: -1 })
+
+  const endDrag = (track: HTMLDivElement) => {
+    dragRef.current.active = false
+    track.classList.remove('is-dragging')
+  }
 
   useEffect(() => {
     if (!selectedService) return
@@ -81,6 +88,37 @@ export default function HomeClient(props: Props) {
             className="home-services-track"
             role="list"
             aria-label="T.A.C Construction services"
+            onPointerDown={(event) => {
+              if (event.pointerType !== 'mouse' || event.button !== 0) return
+              dragRef.current = {
+                active: true,
+                moved: false,
+                startX: event.clientX,
+                startScroll: event.currentTarget.scrollLeft,
+                pointerId: event.pointerId,
+              }
+            }}
+            onPointerMove={(event) => {
+              const drag = dragRef.current
+              if (!drag.active) return
+              const deltaX = event.clientX - drag.startX
+              if (!drag.moved) {
+                if (Math.abs(deltaX) < 6) return
+                drag.moved = true
+                event.currentTarget.setPointerCapture(drag.pointerId)
+                event.currentTarget.classList.add('is-dragging')
+              }
+              event.currentTarget.scrollLeft = drag.startScroll - deltaX
+            }}
+            onPointerUp={(event) => endDrag(event.currentTarget)}
+            onPointerCancel={(event) => endDrag(event.currentTarget)}
+            onClickCapture={(event) => {
+              // A drag that ends over a card must not open the modal.
+              if (!dragRef.current.moved) return
+              event.preventDefault()
+              event.stopPropagation()
+              dragRef.current.moved = false
+            }}
           >
             {props.services.map((service) => (
               <div className="home-service-card-item" role="listitem" key={service.slug}>
@@ -99,6 +137,7 @@ export default function HomeClient(props: Props) {
                     fill
                     sizes="(max-width: 640px) 84vw, (max-width: 1200px) 44vw, 400px"
                     className="home-service-card-image"
+                    draggable={false}
                   />
                   <div className="home-service-card-overlay" aria-hidden="true" />
 

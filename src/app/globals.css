@@ -797,6 +797,16 @@ a { color: inherit; }
   scrollbar-color: #C8102E rgba(13, 13, 13, 0.1);
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .home-services-track { cursor: grab; }
+}
+
+.home-services-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
 .home-services-track::-webkit-scrollbar {
   height: 6px;
 }
@@ -1354,6 +1364,7 @@ a { color: inherit; }
     gap: clamp(14px, 1.2vw, 22px);
     overflow: visible;
     scroll-snap-type: none;
+    cursor: auto;
   }
 
   .home-service-card-item {
