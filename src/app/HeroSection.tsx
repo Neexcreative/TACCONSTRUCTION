@@ -2,8 +2,8 @@
 
 import { motion, type Variants } from 'framer-motion'
 import Image from 'next/image'
-import Link from 'next/link'
 import StatsCounter from './StatsCounter'
+import { PHONE_URL } from '@/lib/seo'
 
 const WHATSAPP_URL = 'https://wa.me/353851976302'
 
@@ -51,9 +51,9 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.div className="home-hero-actions" variants={item}>
-            <Link href="/contact" className="home-hero-primary-cta">
-              Request a Quote
-            </Link>
+            <a href={PHONE_URL} className="home-hero-primary-cta">
+              Call Now
+            </a>
             <a
               href={WHATSAPP_URL}
               className="home-hero-secondary-cta"

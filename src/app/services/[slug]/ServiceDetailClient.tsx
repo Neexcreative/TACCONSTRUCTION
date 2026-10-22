@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import AnimateIn from '@/components/AnimateIn'
 import Link from 'next/link'
 import { ServiceData } from '@/lib/services'
+import { PHONE_URL } from '@/lib/seo'
 
 const F = 'var(--font-outfit), sans-serif'
 const accentCycle = ['#C8102E', '#0D0D0D', '#C8102E', '#0D0D0D', '#C8102E']
@@ -47,8 +48,8 @@ export default function ServiceDetailClient({ svc }: { svc: ServiceData }) {
             </p>
 
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <Link
-                href="/contact"
+              <a
+                href={PHONE_URL}
                 style={{
                   background: '#111111',
                   color: '#FFFFFF',
@@ -62,8 +63,8 @@ export default function ServiceDetailClient({ svc }: { svc: ServiceData }) {
                   border: '1px solid rgba(17,17,17,0.18)',
                 }}
               >
-                Get a Quote
-              </Link>
+                Call Now
+              </a>
             </div>
           </div>
         </section>

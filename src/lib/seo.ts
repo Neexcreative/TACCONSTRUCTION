@@ -4,6 +4,8 @@ export const DEFAULT_TITLE = 'T.A.C Construction | Dublin Renovation & Building 
 export const DEFAULT_DESCRIPTION =
   'Residential renovation, heating, plumbing, roofing and general construction services from T.A.C Construction.'
 
+export const PHONE_URL = 'tel:+353851976302'
+
 export const SOCIAL_IMAGE = {
   url: '/images/Logo.png',
   width: 1594,

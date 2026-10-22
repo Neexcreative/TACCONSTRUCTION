@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import { PHONE_URL } from '@/lib/seo'
 
 const F = 'var(--font-outfit), sans-serif'
 
@@ -117,8 +118,8 @@ export default function Footer() {
               </div>
             ))}
 
-            {/* Quote CTA */}
-            <Link href="/contact" style={{
+            {/* Call CTA */}
+            <a href={PHONE_URL} style={{
               marginTop: 8,
               background: '#C8102E', color: '#fff',
               fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase',
@@ -131,8 +132,8 @@ export default function Footer() {
               onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translate(2px,2px)'; el.style.boxShadow = 'none' }}
               onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ''; el.style.boxShadow = '3px 3px 0px 0px rgba(240,240,240,0.15)' }}
             >
-              Get a Free Quote
-            </Link>
+              Call Now
+            </a>
           </div>
         </div>
       </div>

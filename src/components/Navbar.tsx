@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { useDialogFocus } from '@/lib/useDialogFocus'
+import { PHONE_URL } from '@/lib/seo'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -84,8 +85,8 @@ export default function Navbar() {
             })}
           </ul>
 
-          <Link
-            href="/contact"
+          <a
+            href={PHONE_URL}
             className="site-nav-cta"
             style={{
               background: '#C8102E',
@@ -102,8 +103,8 @@ export default function Navbar() {
               whiteSpace: 'nowrap',
             }}
           >
-            Get a Quote
-          </Link>
+            Call Now
+          </a>
         </div>
 
         <button
@@ -157,8 +158,8 @@ export default function Navbar() {
               })}
             </ul>
 
-            <Link
-              href="/contact"
+            <a
+              href={PHONE_URL}
               style={{
                 display: 'inline-block',
                 width: '100%',
@@ -175,8 +176,8 @@ export default function Navbar() {
                 border: '1px solid rgba(13,13,13,0.18)',
               }}
             >
-              Get a Quote
-            </Link>
+              Call Now
+            </a>
           </div>
         </>
       ) : null}

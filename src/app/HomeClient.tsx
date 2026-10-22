@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { ServiceData } from '@/lib/services'
+import { PHONE_URL } from '@/lib/seo'
 
 type Props =
   | { variant: 'services'; services: ServiceData[] }
@@ -282,9 +283,9 @@ export default function HomeClient(props: Props) {
           </div>
 
           <div className="home-final-cta-actions">
-            <Link href="/contact" className="home-final-cta-primary">
-              Request a Quote
-            </Link>
+            <a href={PHONE_URL} className="home-final-cta-primary">
+              Call Now
+            </a>
             <Link href="/services" className="home-final-cta-secondary">
               View Our Services
             </Link>
